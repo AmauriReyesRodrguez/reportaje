@@ -95,4 +95,5 @@ if __name__ == '__main__':
     with app.app_context():
      db.create_all()  # ✅ crea todas las tablas del modelo
      
-    serve(app, host="0.0.0.0", port=8080)
+    port = int(os.environ.get("PORT", 8080))
+    serve(app, host="0.0.0.0", port=port)
