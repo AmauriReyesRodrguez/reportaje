@@ -1,0 +1,64 @@
+{% extends "base_template.html" %}
+
+{% block titulo %}Login{% endblock %}
+
+{% block body_class %}login-view{% endblock %}
+
+{% block contenido %}
+
+<div class="login-container">
+  <h1>Inicia Sesión</h1>
+
+  <form action="" method="post" novalidate>
+    {{ objLogin.hidden_tag() }}
+
+    
+
+    <!-- Email -->
+    <div class="input-group">
+      {{ objLogin.email.label }}
+      {{ objLogin.email(class="") }}<br>
+      {% for error in objLogin.email.errors %}
+        <span style="color: red">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <!-- Contraseña -->
+    <div class="input-group">
+      {{ objLogin.password.label }}
+      {{ objLogin.password(class="") }}<br>
+      {% for error in objLogin.password.errors %}
+        <span style="color: red">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+        <div class="button">
+      {{ objLogin.enviar(class="") }}
+    </div>
+
+
+  </form>
+
+
+
+
+
+  
+        
+  <!-- Bloque para mostrar los mensajes flash -->
+  {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% if mensajes %}
+      {% for categoria, mensaje in mensajes %}
+        <div class="alert alert-{{ categoria }}">
+          {{ mensaje }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="footer">
+    <p>¿No tienes cuenta?, <a href="{{ url_for('ver_registro') }}">Regístrate</a></p>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base_template.html" %}
+
+{% block titulo %}Registro{% endblock %}
+
+{% block body_class %}register-view{% endblock %}
+
+{% block contenido %}
+
+<div class="login-container">
+  <h1>Regístrate, con tus datos de google</h1>
+
+
+
+  <form action="" method="post" enctype="multipart/form-data" novalidate>
+    {{ objregistro.hidden_tag() }}
+
+    <!--Nombre-->
+    <div class="input-group">
+      {{ objregistro.nombre.label }}
+      {{ objregistro.nombre(class="") }}<br>
+      {% for error in objregistro.nombre.errors %}
+        <span style="color: red">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <!--Email-->
+    <div class="input-group">
+      {{ objregistro.email.label }}
+      {{ objregistro.email(class="") }}<br>
+      {% for error in objregistro.email.errors %}
+        <span style="color: red">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <!--Password-->
+    <div class="input-group">
+      {{ objregistro.password.label }}
+      {{ objregistro.password(class="") }}<br>
+      {% for error in objregistro.password.errors %}
+        <span style="color: red">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="input-group">
+      {{ objregistro.repetir_password.label }}
+      {{ objregistro.repetir_password(class="") }}<br>
+      {% for error in objregistro.repetir_password.errors %}
+        <span style="color: red">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+   
+    <div class="button">
+      {{ objregistro.enviar(class="") }}
+    </div>
+  </form>
+
+  <br>
+       
+
+  <!-- Bloque para mostrar los mensajes flash -->
+  {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% if mensajes %}
+      {% for categoria, mensaje in mensajes %}
+        <div class="alert alert-{{ categoria }}">
+          {{ mensaje }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+
+  <div class="footer">
+    <p>¿Ya tienes cuenta?, <a href="{{ url_for('ver_login') }}">Inicia sesión para continuar</a></p>
+  </div>
+
+
+</div>
+
+
+{% endblock %}
