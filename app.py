@@ -21,6 +21,17 @@ login_manager.init_app(app)
 
 db.init_app(app)
 
+with app.app_context():
+    from sqlalchemy import inspect
+    inspector = inspect(db.engine)
+    if not inspector.get_table_names():
+        print("🧱 No hay tablas, creando todas...")
+        db.create_all()
+        print("✅ Tablas creadas exitosamente.")
+    else:
+        print("📦 Tablas ya existen, no se recrean.")
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, int(user_id))
@@ -88,7 +99,7 @@ def logout():
     return redirect(url_for('ver_login'))
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     
     from waitress import serve
 
