@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'clave_super_segura_123'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tutorial_flask.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
