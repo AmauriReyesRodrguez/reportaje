@@ -88,7 +88,7 @@ def logout():
     return redirect(url_for('ver_login'))
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     
     from waitress import serve
 
